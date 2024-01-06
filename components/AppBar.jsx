@@ -7,6 +7,7 @@ const AppBar = () => {
             <nav className="w-11/12 lg:10/12 mx-auto py-2 flex-center">
                 <Image
                     src={"/assets/todo-logo.png"}
+                    alt="todo-logo"
                     width={110}
                     height={50}
                 />
