@@ -8,6 +8,7 @@ const initialData = {
 
 const Form = () => {
     const [formData, setFormData] = useState(initialData)
+    const [response, setResponse] = useState("")
 
     const handleChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -15,7 +16,21 @@ const Form = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData)
+        try {
+            const data = await fetch("/api/add-todo", {
+                method: "POST",
+                body: JSON.stringify(
+                    { ...formData }
+                )
+            })
+            const res = await data.json()
+            console.log(res)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setFormData(initialData)
+        }
+
     }
 
     return (
