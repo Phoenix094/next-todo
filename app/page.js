@@ -2,7 +2,7 @@
 
 export default function Home() {
   return (
-    <main>
+    <main className="max-w-[1600px] mx-auto">
 
     </main>
   )
