@@ -1,11 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+
 import TodoCard from './TodoCard'
 
 const Feed = () => {
     const [todo, setTodo] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+
+    const router = useRouter()
 
     const fetchData = async () => {
         setIsLoading(true)
@@ -20,29 +24,34 @@ const Feed = () => {
     }
 
     const handleEdit = (id) => {
-        console.log("edit", id)
+        router.push(`todo/${id}`)
     }
 
     const handleDelete = (id) => {
-        console.log("delete", id)
 
     }
-
     useEffect(() => async () => {
         await fetchData()
     }, [])
+
     return (
-        <div className='w-full mt-10'>
-            {
-                isLoading ? <div>
-                    <p>Loading ....</p>
-                </div> : <div className='grid md:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4 '>
-                    {
-                        todo?.map((ele) => <TodoCard key={ele._id} {...ele} handleDelete={handleDelete} handleEdit={handleEdit} />
-                        )
-                    }
-                </div>
-            }
+        <div className='w-full '>
+            <h1 className='text-center font-bold text-5xl'>
+                Your Todo
+            </h1>
+            <div className='mt-10'>
+
+                {
+                    isLoading ? <div>
+                        <p>Loading ....</p>
+                    </div> : <div className='grid md:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4 '>
+                        {
+                            todo?.map((ele) => <TodoCard key={ele._id} {...ele} handleDelete={handleDelete} handleEdit={handleEdit} />
+                            )
+                        }
+                    </div>
+                }
+            </div>
         </div>
     )
 }
