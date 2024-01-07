@@ -27,8 +27,12 @@ const Feed = () => {
         router.push(`todo/${id}`)
     }
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
+        try {
 
+        } catch (error) {
+
+        }
     }
     useEffect(() => async () => {
         await fetchData()

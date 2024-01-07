@@ -13,6 +13,7 @@ const EditTodo = ({ params }) => {
             const todo = await res.json()
 
             setData(todo)
+            console.log(todo)
         } catch (error) {
 
         }
@@ -24,7 +25,16 @@ const EditTodo = ({ params }) => {
     }, [])
     return (
         <main>
-            <Form type={"edit"} data={data} />
+            {
+                data ?
+                    <Form type={"edit"} data={data} /> : (
+                        <div className='h-screen flex-center'>
+                            <p className='text-3xl font-medium text-center'>
+                                Loading....
+                            </p>
+                        </div>
+                    )
+            }
         </main>
     )
 }

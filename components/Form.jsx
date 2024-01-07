@@ -26,6 +26,16 @@ const Form = ({ type, data }) => {
                     )
                 })
             } else if (type === 'edit') {
+                const data = await fetch(`/api/todo/${formData?._id}`, {
+                    method: "PATCH",
+                    body: JSON.stringify({
+                        ...formData
+                    })
+                })
+
+                const res = await data.json()
+                console.log(res)
+                router.push('/')
 
             }
         } catch (error) {
@@ -38,6 +48,10 @@ const Form = ({ type, data }) => {
         }
 
     }
+
+    useEffect(() => {
+        console.log(formData)
+    }, [])
 
     return (
         <div className='w-full flex-center flex-col mt-20'>
