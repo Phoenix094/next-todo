@@ -37,3 +37,16 @@ export const PATCH = async (req, { params }) => {
         return new Response(JSON.stringify("Failed to edit Todo try again...."), { status: 502 })
     }
 }
+
+
+export const DELETE = async (req, { params }) => {
+    try {
+        await connectDB();
+
+        await Todo.findByIdAndDelete(params.id)
+
+        return new Response(JSON.stringify("todo deleted successfully"), { status: 202 })
+    } catch (error) {
+        return new Response(JSON.stringify("Failed to delete Todo try again...."), { status: 502 })
+    }
+}

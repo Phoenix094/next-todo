@@ -29,9 +29,17 @@ const Feed = () => {
 
     const handleDelete = async (id) => {
         try {
+            await fetch(`/api/todo/${id}`, {
+                method: 'DELETE',
+            })
+
+            const newArray = todo.filter((todo) => todo._id !== id)
+
+            console.log(newArray)
+            setTodo(newArray)
 
         } catch (error) {
-
+            console.error(error)
         }
     }
     useEffect(() => async () => {
