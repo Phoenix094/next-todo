@@ -17,6 +17,7 @@ const Feed = () => {
             const data = await fetch("/api/get-todo")
             const res = await data.json()
             setTodo(res)
+            console.log(res)
         } catch (error) {
             console.error(error)
         }
@@ -56,7 +57,7 @@ const Feed = () => {
                 {
                     isLoading ? <div>
                         <p>Loading ....</p>
-                    </div> : <div className='grid md:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4 '>
+                    </div> : <div className='grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4 '>
                         {
                             todo?.map((ele) => <TodoCard key={ele._id} {...ele} handleDelete={handleDelete} handleEdit={handleEdit} />
                             )
