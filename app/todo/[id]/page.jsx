@@ -21,7 +21,7 @@ const EditTodo = ({ params }) => {
 
 
     useEffect(() => async () => {
-        fetchData()
+        await fetchData()
     }, [])
     return (
         <main>
