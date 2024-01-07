@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import TodoCard from './TodoCard'
 
 const Feed = () => {
     const [todo, setTodo] = useState([])
@@ -18,23 +19,27 @@ const Feed = () => {
         setIsLoading(false)
     }
 
-    useEffect(() => {
-        fetchData()
+    const handleEdit = (id) => {
+        console.log("edit", id)
+    }
+
+    const handleDelete = (id) => {
+        console.log("delete", id)
+
+    }
+
+    useEffect(() => async () => {
+        await fetchData()
     }, [])
     return (
-        <div>
+        <div className='w-full mt-10'>
             {
-                todo.length === 0 ? <div>
-                    <p>No Data Found</p>
-                </div> : <div>
+                isLoading ? <div>
+                    <p>Loading ....</p>
+                </div> : <div className='grid md:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4 '>
                     {
-                        todo?.map((ele) => (
-                            <div key={ele._id}>
-                                <p>
-                                    {ele.title}
-                                </p>
-                            </div>
-                        ))
+                        todo?.map((ele) => <TodoCard key={ele._id} {...ele} handleDelete={handleDelete} handleEdit={handleEdit} />
+                        )
                     }
                 </div>
             }
